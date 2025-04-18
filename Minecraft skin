@@ -1,0 +1,72 @@
+# Create a new Minecraft skin with details based on the reference image
+skin = Image.new("RGBA", (64, 64), (0, 0, 0, 0))
+
+# Define enhanced color palette from the visual reference
+skin_tone = (242, 190, 150, 255)
+eye_white = (230, 230, 230, 255)
+eye_blue = (50, 140, 220, 255)
+hair_brown_dark = (60, 40, 25, 255)
+jacket_blue_dark = (30, 80, 140, 255)
+jacket_blue_light = (60, 130, 200, 255)
+shirt_beige = (215, 185, 145, 255)
+jeans_dark = (25, 35, 55, 255)
+jeans_rip = (210, 210, 210, 255)
+shoe_black = (10, 10, 10, 255)
+sole_gray = (60, 60, 60, 255)
+
+# Helper function to fill rectangles
+def fill_area(img, xy, size, color):
+    x0, y0 = xy
+    w, h = size
+    for y in range(y0, y0 + h):
+        for x in range(x0, x0 + w):
+            img.putpixel((x, y), color)
+
+# HEAD (front/left/right/back/top/bottom)
+fill_area(skin, (8, 8), (8, 8), skin_tone)  # front
+fill_area(skin, (10, 10), (1, 2), eye_white)
+fill_area(skin, (11, 10), (1, 2), eye_blue)
+fill_area(skin, (0, 8), (8, 8), hair_brown_dark)  # left
+fill_area(skin, (16, 8), (8, 8), hair_brown_dark)  # right
+fill_area(skin, (8, 0), (8, 8), hair_brown_dark)  # top
+fill_area(skin, (24, 8), (8, 8), hair_brown_dark)  # back
+fill_area(skin, (16, 0), (8, 8), hair_brown_dark)  # bottom
+
+# TORSO
+fill_area(skin, (20, 20), (8, 12), jacket_blue_dark)  # front jacket
+fill_area(skin, (16, 20), (4, 12), jacket_blue_dark)  # left
+fill_area(skin, (28, 20), (4, 12), jacket_blue_dark)  # right
+fill_area(skin, (32, 20), (8, 12), jacket_blue_light)  # back
+fill_area(skin, (20, 16), (8, 4), shirt_beige)  # top
+fill_area(skin, (28, 16), (8, 4), shirt_beige)  # bottom
+
+# ARMS
+fill_area(skin, (44, 20), (4, 12), jacket_blue_dark)  # right arm front
+fill_area(skin, (40, 20), (4, 12), jacket_blue_light)  # right arm back
+fill_area(skin, (36, 52), (4, 12), jacket_blue_dark)  # left arm front
+fill_area(skin, (32, 52), (4, 12), jacket_blue_light)  # left arm back
+
+# LEGS
+fill_area(skin, (4, 20), (4, 12), jeans_dark)  # right leg front
+fill_area(skin, (0, 20), (4, 12), jeans_dark)  # right leg back
+fill_area(skin, (20, 52), (4, 12), jeans_dark)  # left leg front
+fill_area(skin, (16, 52), (4, 12), jeans_dark)  # left leg back
+
+# Ripped jeans detail
+skin.putpixel((5, 25), jeans_rip)
+skin.putpixel((6, 26), jeans_rip)
+skin.putpixel((21, 56), jeans_rip)
+skin.putpixel((22, 57), jeans_rip)
+
+# SHOES
+fill_area(skin, (0, 32), (4, 4), sole_gray)  # right sole
+fill_area(skin, (4, 32), (4, 4), shoe_black)  # right shoe
+fill_area(skin, (16, 64-4), (4, 4), sole_gray)  # left sole
+fill_area(skin, (20, 64-4), (4, 4), shoe_black)  # left shoe
+
+# Save the skin
+final_skin_path = "/mnt/data/final_minecraft_skin_from_reference.png"
+skin.save(final_skin_path)
+
+final_skin_path
+
